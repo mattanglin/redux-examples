@@ -1,9 +1,13 @@
-import React, { useCallback, useContext } from 'react';
-import { counterCtx } from './counterCtx';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCountAction } from './redux-counter';
 import './Counter.css';
 
 export const Counter = () => {
-  const { count, setCount } = useContext(counterCtx);
+  const count = useSelector((store) => store.count);
+  const dispatch = useDispatch();
+  const setCount = useCallback((countParam) => dispatch(setCountAction(countParam)), [dispatch]);
+
   const incremenetCount = useCallback(() => setCount(count + 1), [count, setCount]);
   const decrementCount = useCallback(() => setCount(count - 1), [count, setCount]);
   const resetCount = useCallback(() => setCount(0), [setCount]);

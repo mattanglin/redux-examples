@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { counterCtx } from './counterCtx';
+import { Provider } from 'react-redux';
+import { store } from './redux-counter';
 import { Counter } from './Counter';
 import './App.css';
 
@@ -12,10 +13,9 @@ const pages = [
 
 function App() {
   const [currentPage, setCurrentPage] = useState('counter');
-  const [count, setCount] = useState(0);
 
   return (
-    <counterCtx.Provider value={{ count, setCount }}>
+    <Provider store={store}>
       <div className="App">
         <header className="App-header">
           <h1>State Management with Redux</h1>
@@ -38,7 +38,7 @@ function App() {
           </div>
         </header>
       </div>
-    </counterCtx.Provider>
+    </Provider>
   );
 }
 
