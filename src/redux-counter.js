@@ -1,15 +1,25 @@
 import { createStore } from 'redux';
 
-// Action creator
-export const setCountAction = (count) => ({  type: '@@counter/SET_COUNT', payload: count });
+// Action creators
+export const incrementCountAction = () => ({ type: '@@counter/INCREMENT_COUNT' });
+export const decrementCountAction = () => ({ type: '@@counter/DECREMENT_COUNT' });
+export const resetCountAction = () => ({ type: '@@counter/RESET_COUNT' });
 
 const initialState = { count: 0 };
 
-const reducer = (state = initialState, action = {}) => {
+export const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case '@@counter/SET_COUNT':
+    case '@@counter/INCREMENT_COUNT':
       return {
-        count: action.payload,
+        count: state.count + 1,
+      };
+    case '@@counter/DECREMENT_COUNT':
+      return {
+        count: state.count - 1,
+      };
+    case '@@counter/RESET_COUNT':
+      return {
+        count: 0,
       };
     default:
       return state;
