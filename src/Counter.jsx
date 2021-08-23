@@ -1,8 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
+import { counterCtx } from './counterCtx';
 import './Counter.css';
 
 export const Counter = () => {
-  const [count, setCount] = useState(0);
+  const { count, setCount } = useContext(counterCtx);
   const incremenetCount = useCallback(() => setCount(count + 1), [count, setCount]);
   const decrementCount = useCallback(() => setCount(count - 1), [count, setCount]);
   const resetCount = useCallback(() => setCount(0), [setCount]);
