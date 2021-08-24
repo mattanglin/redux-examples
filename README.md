@@ -34,7 +34,7 @@ the counter value, clicking a different "page" button, and then returning to the
 
 A common solution the above pitfall is to hoist state to a parent component and passing it down via props. A better solution,
 still using core React is to [create a context](./src/counterCtx.js) and [wrap our entire app with the context provider](./src/App.js#L18).
-Now we can easily [access `count` and `setCount` in our Counter component](./src/Counter.js#L6) (or any other component for that matter) by consuming the
+Now we can easily [access `count` and `setCount` in our Counter component](./src/Counter.jsx#L6) (or any other component for that matter) by consuming the
 provided context. Additionally, since the context won't ever unount (unless we unmount our entire App) we don't have to worry about the value getting lost.
 
 ## 04 Redux Solution
@@ -46,5 +46,5 @@ Redux is essentially just global state provided to our app globally via context.
 - [Create a store with our configured reducer](./src/redux-counter.js#L20)
 - and finally, [wrap our app with configured redux context provider](./src/App.js#L18) just like we did with our previous context.
 
-Now we can access our `count` state and call (dispatch) our `setCount` action from [within our Counter component](./src/Counter.js#L7-L9) just like before!
+Now we can access our `count` state and call (dispatch) our `setCount` action from [within our Counter component](./src/Counter.jsx#L7-L9) just like before!
 That seems like a lot of overhead just to accomplish what we easily did with React context...
