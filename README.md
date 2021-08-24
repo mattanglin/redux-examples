@@ -24,3 +24,8 @@ A common function of our React components and applications is basic state manage
 Here we see in the [Counter Component](src/Counter.jsx) basic state management with the [useState hook](https://reactjs.org/docs/hooks-reference.html#usestate)
 to maintain the counter count.
 
+## 02 React State Pitfalls
+
+A common pitfall for localized React state is being unable to access state in parent or sibling components. Additionally,
+your local state will be lost everytime your component unmounts and remounts. In this example you can see this by changing
+the counter value, clicking a different "page" button, and then returning to the "counter" page.
