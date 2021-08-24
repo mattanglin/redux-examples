@@ -66,7 +66,7 @@ Since Redux reducers need to be pure functions that can only handle plain Javasc
 asynchrounous side effects. Redux [thunk middleware is added to our store](./src/redux-counter.js#L69-L71) so it can intercept and handle "thunk" actions allowing us to dispatch functions in addition
 to plain object actions. The middleware is [incredibly simple](https://github.com/reduxjs/redux-thunk/blob/master/src/index.js). If the dispatched [action is a function (thunk) we invoke that function](https://github.com/reduxjs/redux-thunk/blob/master/src/index.js#L3),
 passing it our stores `dispatch` and `getStore` as paramaters. If the dispatched action is a [regualr javascript object action, we let it pass through to our reducers](https://github.com/reduxjs/redux-thunk/blob/master/src/index.js#L7) as is.
-This allows us to create [asynchronous thunk actions](./src/redux-coutner.js#LL11-L32) we can [dispatch to our store](./src.AutoIncrementor.jsx#L13).
+This allows us to create [asynchronous thunk actions](./src/redux-coutner.js#LL11-L32) we can [dispatch to our store](./src/AutoIncrementor.jsx#L13).
 As the async function executes it can [dispatch](./src/redux-counter.js#L15) as [many actions](./src/redux-counter.js#L22) as [needed](./src/redux-counter.js#L30) during its lifecycle.
 Any standard object actions that are dispatched will get [handled by our reducer](./src/redux-counter.js#L53) as expected.
 The thunk action in this example may not be terribly useful, but hopefully you can see how it could easily translate to other asynchronous functionality (like a fetch call with optional success and failure actions).
