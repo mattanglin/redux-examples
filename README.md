@@ -48,3 +48,14 @@ Redux is essentially just global state provided to our app globally via context.
 
 Now we can access our `count` state and call (dispatch) our `setCount` action from [within our Counter component](src/Coutner.js#L7-9) just like before!
 That seems like a lot of overhead just to accomplish what we easily did with React context...
+
+## 05 Redux Reducer Actions
+
+We can refactor our existing solution by abstracting the separate counter handlers out of Counter component and [making them into explicit actions](src/redux-counter.js#L4-6) that
+get dispatched to our store and then [handled by our reducer](src/redux-counter.js#L12-23). This moves the counter functionality complexity out of our components which makes it
+much easier to [unit test our counter behavior](src/redux-counter.spec.js#L8). Which is good. Unit tests are a good thing.
+
+You can run the tests yourself with the following command:
+```
+> npm test
+```
