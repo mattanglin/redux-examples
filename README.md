@@ -46,5 +46,5 @@ Redux is essentially just global state provided to our app globally via context.
 - [Create a store with our configured reducer](src/redux-counter.js#L20)
 - and finally, [wrap our app with configured redux context provider](src/App.js#L18) just like we did with our previous context.
 
-Now we can access our `count` state and call (dispatch) our `setCount` action from [within our Counter component](src/Coutner.js#L7-9) just like before!
+Now we can access our `count` state and call (dispatch) our `setCount` action from [within our Counter component](src/Coutner.js#L7-L9) just like before!
 That seems like a lot of overhead just to accomplish what we easily did with React context...
