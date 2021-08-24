@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { store } from './redux-counter';
 import { Counter } from './Counter';
 import './App.css';
+import { AutoIncrementor } from './AutoIncrementor';
 
 const pages = [
   'counter',
@@ -33,6 +34,9 @@ function App() {
             ) : (
               <div>
                 Now we're on {currentPage}
+                {currentPage === 'page4' && (
+                  <AutoIncrementor />
+                )}
               </div>
             )}
           </div>

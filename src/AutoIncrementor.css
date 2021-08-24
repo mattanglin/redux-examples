@@ -1,0 +1,6 @@
+.auto-incrementor {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
