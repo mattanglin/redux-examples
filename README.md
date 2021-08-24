@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Redux Examples
 
+Basic example of Redux usage and why we use it for team walkthrough.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Usage
 
-In the project directory, you can run:
+This project has stepped branches so you can see the reasoning and thought process behind incrementally integrating redux into your appplication.
 
-### `yarn start`
+### Install
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+> npm install
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Run App
+```
+> npm start
+```
 
-### `yarn test`
+## 01 React State
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+A common function of our React components and applications is basic state management.
+Here we see in the [Counter Component](src/Counter.jsx) basic state management with the [useState hook](https://reactjs.org/docs/hooks-reference.html#usestate)
+to maintain the counter count.
 
-### `yarn build`
+## 02 React State Pitfalls
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A common pitfall for localized React state is being unable to access state in parent or sibling components. Additionally,
+your local state will be lost everytime your component unmounts and remounts. In this example you can see this by changing
+the counter value, clicking a different "page" button, and then returning to the "counter" page.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 03 React Context Solution
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+A common solution the above pitfall is to hoist state to a parent component and passing it down via props. A better solution,
+still using core React is to [create a context](src/counterCtx.js) and [wrap our entire app with the context provider](src/App.js#L18).
+Now we can easily [access `count` and `setCount` in our Counter component](src/Counter.js#L6) (or any other component for that matter) by consuming the
+provided context. Additionally, since the context won't ever unount (unless we unmount our entire App) we don't have to worry about the value getting lost.
 
-### `yarn eject`
+## 04 Redux Solution
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Redux is essentially just global state provided to our app globally via context. In our redux implementation we
+- [create an action for `setCount`](src/redux-counter.js#L4)
+- [create an object shape and default value for our initial store state](src/redux-counter.js#L6)
+- [create a reducer to handle our `setCount` action](src/redux-counter.js#L8)
+- [Create a store with our configured reducer](src/redux-counter.js#L20)
+- and finally, [wrap our app with configured redux context provider](src/App.js#L18) just like we did with our previous context.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Now we can access our `count` state and call (dispatch) our `setCount` action from [within our Counter component](src/Coutner.js#L7-9) just like before!
+That seems like a lot of overhead just to accomplish what we easily did with React context...
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 05 Redux Reducer Actions
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+We can refactor our existing solution by abstracting the separate counter handlers out of Counter component and [making them into explicit actions](src/redux-counter.js#L4-6) that
+get dispatched to our store and then [handled by our reducer](src/redux-counter.js#L12-23). This moves the counter functionality complexity out of our components which makes it
+much easier to [unit test our counter behavior](src/redux-counter.spec.js#L8). Which is good. Unit tests are a good thing.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+You can run the tests yourself with the following command:
+```
+> npm test
+```
