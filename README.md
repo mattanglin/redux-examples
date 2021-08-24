@@ -21,6 +21,6 @@ This project has stepped branches so you can see the reasoning and thought proce
 ## 01 React State
 
 A common function of our React components and applications is basic state management.
-Here we see in the [Counter Component](src/Counter.jsx) basic state management with the [useState hook](https://reactjs.org/docs/hooks-reference.html#usestate)
+Here we see in the [Counter Component](./src/Counter.jsx) basic state management with the [useState hook](https://reactjs.org/docs/hooks-reference.html#usestate)
 to maintain the counter count.
 
