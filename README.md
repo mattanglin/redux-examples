@@ -34,5 +34,5 @@ the counter value, clicking a different "page" button, and then returning to the
 
 A common solution the above pitfall is to hoist state to a parent component and passing it down via props. A better solution,
 still using core React is to [create a context](./src/counterCtx.js) and [wrap our entire app with the context provider](./src/App.js#L18).
-Now we can easily [access `count` and `setCount` in our Counter component](./src/Counter.js#L6) (or any other component for that matter) by consuming the
+Now we can easily [access `count` and `setCount` in our Counter component](./src/Counter.jsx#L6) (or any other component for that matter) by consuming the
 provided context. Additionally, since the context won't ever unount (unless we unmount our entire App) we don't have to worry about the value getting lost.
